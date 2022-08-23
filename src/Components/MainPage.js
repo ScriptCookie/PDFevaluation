@@ -112,7 +112,7 @@ function MainPage() {
 
     return(
         <div>
-            <h1>페이지</h1>
+            <h1>관리자 페이지</h1>
             <h2>개설된 과목</h2>
             <ul id='subList'></ul>
             <button onClick={createMove}>과목 만들기</button>

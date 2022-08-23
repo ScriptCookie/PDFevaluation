@@ -13,6 +13,7 @@ import SubProject from './Components/Subproject';
 import Invitation from './Components/Invitation';
 import Register from './Components/Register';
 import Studentsubject from './Components/Studentsubject';
+import Subjectquest from './Components/Subjectquest';
 
 /* global history */
 /* global location */
@@ -75,6 +76,7 @@ function App() {
         <Route path='/Mmain' element={<Mmain />}></Route>
         <Route path='/MainPage/*' element={<MainPage />}></Route>
         <Route path='/Subject' element={<Subject/>}></Route>
+        <Route path='/Subjectquest' element={<Subjectquest/>}></Route>
         {/* 중첩 라우팅에 대해 공부를 하자 */}
         {/* 새로고침 문제는 서버에서 데이터를 가져오는 동안 로딩창을 만들면 갠찮지 않을까 */}
         <Route path={(`/Subject/${dataUrl}`)} element={<SubProject/>}></Route>
