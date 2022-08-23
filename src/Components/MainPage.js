@@ -69,18 +69,18 @@ function MainPage() {
             })
         })
 
-        fetch('http://localhost:8000/api/subjectdata', {
-            method : "POST",
-            headers : {
-                "Content-Type" : "application/json",
-                "Accept" : "application/json"
-            },
-            body : JSON.stringify({
-                selectSubs : selectSub
-            })
-        })
+        // fetch('http://localhost:8000/api/subjectdata', {
+        //     method : "POST",
+        //     headers : {
+        //         "Content-Type" : "application/json",
+        //         "Accept" : "application/json"
+        //     },
+        //     body : JSON.stringify({
+        //         selectSubs : selectSub
+        //     })
+        // })
 
-        console.log('보낸 데이터', selectSub);
+        //console.log('보낸 데이터', selectSub);
 
         const con = {
             method : "get"
@@ -106,11 +106,16 @@ function MainPage() {
         })
     }
 
+    function createMove() {
+        navigate('/Mmain');
+    }
+
     return(
         <div>
             <h1>페이지</h1>
             <h2>개설된 과목</h2>
             <ul id='subList'></ul>
+            <button onClick={createMove}>과목 만들기</button>
         </div>
     );
 }

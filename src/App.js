@@ -9,9 +9,20 @@ import Smain from './Components/Smain';
 import Mmain from './Components/Mmain';
 import MainPage from './Components/MainPage';
 import Subject from './Components/Subject';
+import SubProject from './Components/Subproject';
+import Invitation from './Components/Invitation';
+import Register from './Components/Register';
+import Studentsubject from './Components/Studentsubject';
+
+/* global history */
+/* global location */
+/* global window */
+
+/* eslint no-restricted-globals: ["off"] */
 
 function App() {
   const [dataUrl, setDataUrl] = useState();
+  const [subdata, setSubData] = useState();
 
   function getSubjectUrl() {
     const config = {
@@ -25,7 +36,6 @@ function App() {
     })
     .catch(error => console.log("fech error!!"));
 
-    //getSubjectData();
   }
 
   // function getSubjectData() {
@@ -35,14 +45,21 @@ function App() {
   //   fetch('http://localhost:8000/api/subjectdata', config)
   //   .then(res => res.json())
   //   .then(subData => {
-  //     console.log('가져온 데이터 정보', subData);
+  //     console.log('가져온 데이터 정보', subData.explains);
+  //     setSubData(subData.explains);
   //   })
   //   .catch(error => console.log("fech error!!"));
   // }
 
     useEffect(() => {
       getSubjectUrl();
-      //location.reload();
+      //getSubjectData();
+
+      if (self.name !== 'reload') {
+        self.name = 'reload';
+        self.location.reload(true);
+    }
+    else self.name = ''; 
     }, [])
 
   return(
@@ -58,8 +75,12 @@ function App() {
         <Route path='/Mmain' element={<Mmain />}></Route>
         <Route path='/MainPage/*' element={<MainPage />}></Route>
         <Route path='/Subject' element={<Subject/>}></Route>
-        <Route path={(`/Subject/${dataUrl}`)} element={'보여질 데이터 공간 과목 / PDF 파일'}></Route>
-        <Route path='/영어' element={'ddd'}></Route>
+        {/* 중첩 라우팅에 대해 공부를 하자 */}
+        {/* 새로고침 문제는 서버에서 데이터를 가져오는 동안 로딩창을 만들면 갠찮지 않을까 */}
+        <Route path={(`/Subject/${dataUrl}`)} element={<SubProject/>}></Route>
+        <Route path={(`/Subject/${dataUrl}/invitation`)} element={<Invitation/>}></Route>
+        <Route path={(`/Subject/${dataUrl}/register`)} element={<Register/>}></Route>
+        <Route path={('/Subject/Studentsubject')} element={<Studentsubject/>}></Route>
       </Routes>
     </div>
   );

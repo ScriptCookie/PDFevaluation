@@ -1,11 +1,10 @@
 import {useEffect, useState} from 'react';
 import React from 'react';
-import {Routes , Route} from 'react-router-dom';
 
 function Viewer() {
   //------------------------------------------PDFLOADER--------------------------------------------
   const [files , setFiles] = useState('');
-  const [datas , setDatas] = useState(()=> JSON.parse(window.localStorage.getItem("data")) || 0);
+  const [datas , setDatas] = useState();
 
   function onLoadFile(event) {
     const file = event.target.files;
@@ -55,10 +54,10 @@ function Viewer() {
   useEffect(() => {
     fetch('http://localhost:8000/api/list')
     .then((res) => res.json())
-    .then(data => window.localStorage.setItem("data", JSON.stringify(data[0])));
+    .then(data => setDatas(data[0]));
   }, [])
 
-  console.log('datas =>', datas[0].data);
+  //console.log('datas =>', datas[0].data);
   //console.log('files =>', files);
 
   return (
