@@ -3,14 +3,9 @@ import {useState} from 'react';
 function Mmain() {
 
     const [subject , setSubject] = useState('');
-    const [explain , setExplain] = useState('');
 
     function subjectEvent(e) {
         setSubject(e.target.value);
-    }
-
-    function explainEvent(e) {
-        setExplain(e.target.value);
     }
 
     function subJect() {
@@ -22,7 +17,8 @@ function Mmain() {
             },
             body : JSON.stringify({
                 subject : subject,
-                explain : explain
+                explain : null,
+
             })
         })
         console.log('ok');
@@ -32,7 +28,7 @@ function Mmain() {
         <div>
             <h1>Manager Main</h1>
             <input placeholder='과목이름' onChange={subjectEvent}></input>
-            <input placeholder='설명글' onChange={explainEvent}></input>
+            <input placeholder='설명글'></input>
             <button onClick={subJect}>과목 개설</button>
         </div>
     );
