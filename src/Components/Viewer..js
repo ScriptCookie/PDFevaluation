@@ -5,6 +5,7 @@ function Viewer() {
   //------------------------------------------PDFLOADER--------------------------------------------
   const [files , setFiles] = useState('');
   const [datas , setDatas] = useState();
+  const [subName , setSubName] = useState();
 
   function onLoadFile(event) {
     const file = event.target.files;
@@ -27,12 +28,20 @@ function Viewer() {
     document.getElementById("previewPDF").src = datas[0].data;
   }
 
+  const config = {
+    method : "get"
+  }
+  fetch('http://localhost:8000/api/name', config)
+  .then(res => res.json())
+  .then(nameData => setSubName(nameData));
+
   // ----------------------------------- POST --------------------------------------------------
   function flieInput(event) {
+
     event.preventDefault();
 
     const fileReader = new FileReader();
-    fileReader.readAsDataURL(files[0]);
+    fileReader.readAsDataURL(files[0]); // 파일이 다중으로 들어가지 않는 문제
 
     fileReader.onload = function () {
       fetch('http://localhost:8000/api/list', {
@@ -42,10 +51,11 @@ function Viewer() {
         "Accept" : "application/json"
       },
       body : JSON.stringify({
-        data : fileReader.result
+        data : fileReader.result,
+        subjectName : subName
       })
     })
-      //console.log('result =>' , fileReader.result)
+      //console.log('result =>' , subName)
   };
   }
 
